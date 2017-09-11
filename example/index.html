@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Cross Menu</title>
+  <style>
+    html {
+      box-sizing: border-box;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: inherit;
+    }
+
+    body {
+      margin: 0;
+    }
+
+    .menu {
+      width: 200px;
+      height: 500px;
+      margin-top: 0;
+      background-color: rgba(0, 0, 0, .5);
+      cursor: pointer;
+    }
+
+    .menu li {
+      line-height: 50px;
+      color: #fff;
+    }
+
+    .menu li:hover {
+      background-color: rgba(255, 255, 255, .5);
+    }
+
+    .submenu {
+      position: absolute;
+      top: 0;
+      left: 200px;
+      width: 800px;
+      margin-top: 0;
+      min-height: 500px;
+      background-color: #fff;
+      box-shadow: 0 0 3px rgba(0, 0, 0, .3);
+    }
+
+    .submenu li {
+      display: none;
+    }
+
+    .submenu li.active {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <ol class="menu">
+    <li>menu-1</li>
+    <li>menu-2</li>
+    <li>menu-3</li>
+    <li>menu-4</li>
+    <li>menu-5</li>
+  </ol>
+  <ul class="submenu">
+    <li>submenu-1</li>
+    <li>submenu-2</li>
+    <li>submenu-3</li>
+    <li>submenu-4</li>
+    <li>submenu-5</li>
+  </ul>
+  <script src="../dist/cross-menu.js"></script>
+  <script>
+    crossMenu({
+      menu: document.querySelector('.menu'),
+      menuItemTag: 'li',
+      submenu: document.querySelector('.submenu'),
+      submenuItemTag: 'li'
+    })
+  </script>
+</body>
+
+</html>

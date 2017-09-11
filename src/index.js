@@ -1,7 +1,7 @@
 const mouseTrackList = []
 const ACTIVE_CLASSNAME = 'active'
 
-function crossMenu (options) {
+module.exports = function crossMenu (options) {
   const { menu, menuItemTag, submenu, submenuItemTag, delay = 300 } = options
   const menuItems = [...menu.querySelectorAll(menuItemTag)]
   const submenuItems = [...submenu.querySelectorAll(submenuItemTag)]

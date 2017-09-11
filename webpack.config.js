@@ -5,7 +5,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'cross-menu.js',
-    library: 'CrossMenu',
+    library: 'crossMenu',
     libraryTarget: 'umd'
   },
   module: {
