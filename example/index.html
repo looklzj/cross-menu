@@ -21,6 +21,12 @@
       margin: 0;
     }
 
+    .container {
+      position: absolute;
+      top: 100px;
+      left: 200px;
+    }
+
     .menu {
       width: 200px;
       height: 500px;
@@ -34,11 +40,12 @@
       color: #fff;
     }
 
-    .menu li:hover {
+    .menu li.active-menu {
       background-color: rgba(255, 255, 255, .5);
     }
 
     .submenu {
+      display: none;
       position: absolute;
       top: 0;
       left: 200px;
@@ -49,38 +56,51 @@
       box-shadow: 0 0 3px rgba(0, 0, 0, .3);
     }
 
+    .submenu.active-menu {
+      display: block;
+    }
+
     .submenu li {
       display: none;
     }
 
-    .submenu li.active {
+    .submenu li.active-menu {
       display: block;
     }
   </style>
 </head>
 
 <body>
-  <ol class="menu">
-    <li>menu-1</li>
-    <li>menu-2</li>
-    <li>menu-3</li>
-    <li>menu-4</li>
-    <li>menu-5</li>
-  </ol>
-  <ul class="submenu">
-    <li>submenu-1</li>
-    <li>submenu-2</li>
-    <li>submenu-3</li>
-    <li>submenu-4</li>
-    <li>submenu-5</li>
-  </ul>
+  <div class="container">
+    <ol class="menu">
+      <li>menu-1</li>
+      <li>menu-2</li>
+      <li>menu-3</li>
+      <li>menu-4</li>
+      <li>menu-5</li>
+    </ol>
+    <ul class="submenu">
+      <li>submenu-1</li>
+      <li>submenu-2</li>
+      <li>submenu-3</li>
+      <li>submenu-4</li>
+      <li>submenu-5</li>
+    </ul>
+  </div>
   <script src="../dist/cross-menu.js"></script>
   <script>
+    var $container = document.querySelector('.container')
+
     crossMenu({
       menu: document.querySelector('.menu'),
       menuItemTag: 'li',
       submenu: document.querySelector('.submenu'),
-      submenuItemTag: 'li'
+      submenuItemTag: 'li',
+      delay: 200,
+      position: { top: $container.offsetTop, left: $container.offsetLeft },
+      activeClassName: 'active-menu',
+      activeIndex: 3,
+      keepSubmenuVisible: true
     })
   </script>
 </body>

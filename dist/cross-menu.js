@@ -83,7 +83,6 @@ return /******/ (function(modules) { // webpackBootstrap
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var mouseTrackList = [];
-var ACTIVE_CLASSNAME = 'active';
 
 module.exports = function crossMenu(options) {
   var menu = options.menu,
@@ -91,21 +90,28 @@ module.exports = function crossMenu(options) {
       submenu = options.submenu,
       submenuItemTag = options.submenuItemTag,
       _options$delay = options.delay,
-      delay = _options$delay === undefined ? 300 : _options$delay;
+      delay = _options$delay === undefined ? 300 : _options$delay,
+      _options$activeClassN = options.activeClassName,
+      activeClassName = _options$activeClassN === undefined ? 'active' : _options$activeClassN,
+      _options$position = options.position,
+      position = _options$position === undefined ? { top: 0, left: 0 } : _options$position;
+  var activeIndex = options.activeIndex,
+      _options$keepSubmenuV = options.keepSubmenuVisible,
+      keepSubmenuVisible = _options$keepSubmenuV === undefined ? false : _options$keepSubmenuV;
+
 
   var menuItems = [].concat(_toConsumableArray(menu.querySelectorAll(menuItemTag)));
   var submenuItems = [].concat(_toConsumableArray(submenu.querySelectorAll(submenuItemTag)));
+  initMenu([menuItems, submenuItems], activeIndex, activeClassName);
 
-  menuItems.forEach(function (item, index) {
-    return item.dataset.index = index + 1;
-  });
-  submenuItems.forEach(function (item, index) {
-    return item.dataset.index = index + 1;
-  });
+  if (activeIndex !== undefined) {
+    activeIndex -= 1;
+    submenu.classList.add(activeClassName);
+  }
 
   var isMouseInSubmenu = false;
 
-  // 记录当前鼠标位置是否处在耳机菜单
+  // 记录当前鼠标位置是否处在二级菜单
   submenu.addEventListener('mouseenter', function () {
     return isMouseInSubmenu = true;
   }, false);
@@ -116,23 +122,27 @@ module.exports = function crossMenu(options) {
   menu.addEventListener('mouseenter', function () {
     return document.addEventListener('mousemove', handleMousemMoveMenu, false);
   }, false);
+
   menu.addEventListener('mouseleave', function () {
-    return document.removeEventListener('mousemove', handleMousemMoveMenu);
+    document.removeEventListener('mousemove', handleMousemMoveMenu);
+
+    setTimeout(function () {
+      if (!keepSubmenuVisible && !isMouseInSubmenu) {
+        removeActiveClass();
+        submenu.classList.remove(activeClassName);
+      }
+    }, 0);
   }, false);
 
-  var activeMenuItem = null;
   var timer = 0;
 
   menu.addEventListener('mouseover', function (event) {
     if (event.target && event.target.nodeName.toLowerCase() === menuItemTag) {
-      if (!activeMenuItem) {
-        activeMenuItem = event.target;
-        return toggleActiveMenu(event);
-      }
+      if (activeIndex === undefined) return toggleActiveMenu(event);
 
       if (timer) clearTimeout(timer);
 
-      if (isNeedDelay(submenu, mouseTrackList[1], mouseTrackList[0])) {
+      if (isNeedDelay(submenu, mouseTrackList[1], mouseTrackList[0], position)) {
         timer = setTimeout(function () {
           if (!isMouseInSubmenu) {
             toggleActiveMenu(event);
@@ -148,29 +158,34 @@ module.exports = function crossMenu(options) {
   var currentIndex = 0;
 
   function toggleActiveMenu(event) {
-    menuItems[currentIndex].classList.remove(ACTIVE_CLASSNAME);
-    submenuItems[currentIndex].classList.remove(ACTIVE_CLASSNAME);
-    currentIndex = +event.target.dataset.index - 1;
-    menuItems[currentIndex].classList.add(ACTIVE_CLASSNAME);
-    submenuItems[currentIndex].classList.add(ACTIVE_CLASSNAME);
+    if (activeIndex !== undefined) removeActiveClass();
+
+    activeIndex = +event.target.dataset.index - 1;
+
+    menuItems[activeIndex].classList.add(activeClassName);
+    submenuItems[activeIndex].classList.add(activeClassName);
+
+    submenu.classList.add(activeClassName);
+  }
+
+  function removeActiveClass() {
+    menuItems[activeIndex].classList.remove(activeClassName);
+    submenuItems[activeIndex].classList.remove(activeClassName);
   }
 };
 
-// module.exports = crossMenu
+function isNeedDelay(_ref, prePos, curPos, _ref2) {
+  var offsetTop = _ref.offsetTop,
+      offsetLeft = _ref.offsetLeft,
+      offsetHeight = _ref.offsetHeight;
+  var top = _ref2.top,
+      left = _ref2.left;
 
-function isNeedDelay(submenu, prePos, curPos) {
-  var offsetTop = submenu.offsetTop,
-      offsetLeft = submenu.offsetLeft,
-      clientHeight = submenu.clientHeight;
+  var x = offsetLeft + left;
+  var y = offsetTop + top;
 
-  var topLeft = {
-    x: offsetLeft,
-    y: offsetTop
-  };
-  var bottomLeft = {
-    x: offsetLeft,
-    y: offsetTop + clientHeight
-  };
+  var topLeft = { x: x, y: y };
+  var bottomLeft = { x: x, y: y + offsetHeight };
 
   return isMouseInTrangle(curPos, prePos, topLeft, bottomLeft);
 }
@@ -207,6 +222,18 @@ function isSameSign(a, b) {
 function handleMousemMoveMenu(event) {
   mouseTrackList.unshift({ x: event.pageX, y: event.pageY });
   if (mouseTrackList.length > 2) mouseTrackList.length = 2;
+}
+
+function initMenu(menus, activeIndex, activeClassName) {
+  menus.forEach(function (menu) {
+    menu.forEach(function (item, index) {
+      index += 1;
+      item.dataset.index = index;
+      if (index === activeIndex) {
+        item.classList.add(activeClassName);
+      }
+    });
+  });
 }
 
 /***/ })
