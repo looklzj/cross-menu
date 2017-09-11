@@ -36,7 +36,7 @@ module.exports = function crossMenu (options) {
 
   menu.addEventListener('mouseover', (event) => {
     if (event.target && event.target.nodeName.toLowerCase() === menuItemTag) {
-      if (activeIndex === undefined) return toggleActiveMenu(event)
+      if (activeIndex === undefined || mouseTrackList.length < 2) return toggleActiveMenu(event)
 
       if (timer) clearTimeout(timer)
 
