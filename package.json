@@ -1,0 +1,26 @@
+{
+  "name": "cross-menu",
+  "version": "1.0.0",
+  "description": "",
+  "main": "cross-menu.js",
+  "scripts": {
+    "build": "webpack -p --progress --display-error-details --profile"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fe-monine/cross-menu.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fe-monine/cross-menu/issues"
+  },
+  "homepage": "https://github.com/fe-monine/cross-menu#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "webpack": "^3.5.6"
+  }
+}
