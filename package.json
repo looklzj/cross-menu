@@ -1,7 +1,7 @@
 {
   "name": "cross-menu",
   "version": "1.1.0",
-  "description": "",
+  "description": "仿亚马逊智能导航菜单功能，无依赖，支持现代浏览器",
   "main": "dist/cross-menu.js",
   "scripts": {
     "build": "webpack --progress --display-error-details --profile"
@@ -10,13 +10,21 @@
     "type": "git",
     "url": "git+https://github.com/fe-monine/cross-menu.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "menu",
+    "菜单",
+    "nav",
+    "导航",
+    "Amazon",
+    "亚马逊"
+  ],
+  "author": "Monine",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/fe-monine/cross-menu/issues"
   },
   "homepage": "https://github.com/fe-monine/cross-menu#readme",
+  "dependencies": {},
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
