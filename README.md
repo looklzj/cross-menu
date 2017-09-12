@@ -27,7 +27,41 @@ crossMenu(options)
 
 ## options
 
-- **menu**
+- `menu {Object Element} @require`
+
+  一级菜单元素
+
+- `menuItemTag {String} @require`
+
+  一级菜单元素下的菜单项标签
+
+- `submenu {Object Element} @require`
+
+  二级菜单元素
+
+- `submenuItemTag {String} @require`
+
+  二级菜单元素下的菜单项标签
+
+- `delay {Number} @default = 300`
+
+  菜单切换延迟时间
+
+- `position {Object} @default = { x: 0, y: 0 }`
+
+  菜单距离浏览器最上边和最左边的距离
+
+- `activeClassName {String} @default = 'active'`
+
+  当前活动菜单类名
+
+- `activeIndex {Number}`
+
+  当前活动菜单的索引值（初始化默认显示第几个菜单项）
+
+- `keepSubmenuVisible {Boolean} @default = false`
+
+  是否保持二级菜单显示状态（不隐藏二级菜单）
 
 ### v1.0.0
 
