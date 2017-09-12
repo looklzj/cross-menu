@@ -81,7 +81,23 @@ crossMenu(options)
 
   是否保持二级菜单显示状态（不隐藏二级菜单）
 
-### v1.0.0
+### example
+
+```
+crossMenu({
+  menu: document.querySelector('.menu'),
+  menuItemTag: 'li',
+  submenu: document.querySelector('.submenu'),
+  submenuItemTag: 'li',
+  delay: 100,
+  position: { top: 100, left: 200 },
+  activeClassName: 'active-menu',
+  activeIndex: 3,
+  keepSubmenuVisible: true
+})
+```
+
+## v1.1
 
 - [x] 支持自定义定位
 - [x] 支持初始化显示指定二级菜单
