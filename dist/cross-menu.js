@@ -111,7 +111,6 @@ module.exports = function crossMenu(options) {
 
   var isMouseInSubmenu = false;
 
-  // 记录当前鼠标位置是否处在二级菜单
   submenu.addEventListener('mouseenter', function () {
     return isMouseInSubmenu = true;
   }, false);
@@ -195,7 +194,6 @@ function isMouseInTrangle(p, a, b, c) {
   var pb = vector(p, b);
   var pc = vector(p, c);
 
-  // 参数顺序不能变
   var t1 = vectorProduct(pa, pb);
   var t2 = vectorProduct(pb, pc);
   var t3 = vectorProduct(pc, pa);
@@ -214,7 +212,6 @@ function vectorProduct(a, b) {
   return a.x * b.y - b.x * a.y;
 }
 
-// 参数同为正数或负数
 function isSameSign(a, b) {
   return (a ^ b) >= 0;
 }
