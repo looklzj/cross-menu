@@ -15,7 +15,6 @@ module.exports = function crossMenu (options) {
 
   let isMouseInSubmenu = false
 
-  // 记录当前鼠标位置是否处在二级菜单
   submenu.addEventListener('mouseenter', () => (isMouseInSubmenu = true), false)
   submenu.addEventListener('mouseleave', () => (isMouseInSubmenu = false), false)
 
@@ -87,7 +86,6 @@ function isMouseInTrangle (p, a, b, c) {
   const pb = vector(p, b)
   const pc = vector(p, c)
 
-  // 参数顺序不能变
   const t1 = vectorProduct(pa, pb)
   const t2 = vectorProduct(pb, pc)
   const t3 = vectorProduct(pc, pa)
@@ -106,7 +104,6 @@ function vectorProduct (a, b) {
   return a.x * b.y - b.x * a.y
 }
 
-// 参数同为正数或负数
 function isSameSign (a, b) {
   return (a ^ b) >= 0
 }
