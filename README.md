@@ -3,6 +3,7 @@
 [![GitHub stars](https://img.shields.io/github/stars/fe-monine/cross-menu.svg)](https://github.com/fe-monine/cross-menu/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/fe-monine/cross-menu.svg)](https://github.com/fe-monine/cross-menu/network)
 [![GitHub issues](https://img.shields.io/github/issues/fe-monine/cross-menu.svg)](https://github.com/fe-monine/cross-menu/issues)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![npm version](https://badge.fury.io/js/cross-menu.svg)](https://badge.fury.io/js/cross-menu)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/fe-monine/cross-menu/master/LICENSE)
 
@@ -35,7 +36,7 @@ crossMenu(options)
 
 - #### menu
 
-  `{Object Element} @require`
+  `{HTMLElement} @require`
 
   一级菜单元素
 
@@ -47,7 +48,7 @@ crossMenu(options)
 
 - #### submenu
 
-  `{Object Element} @require`
+  `{HTMLElement} @require`
 
   二级菜单元素
 
