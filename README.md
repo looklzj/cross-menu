@@ -66,7 +66,7 @@ crossMenu(options)
 
 - #### position
 
-  `{Object} @default = { x: 0, y: 0 }`
+  `{Object} @default = { top: 0, left: 0 }`
 
   菜单距离浏览器最上边和最左边的距离
 
