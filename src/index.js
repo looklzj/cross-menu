@@ -1,8 +1,8 @@
 const mouseTrackList = []
 
 module.exports = function crossMenu (options) {
-  const { menu, menuItemTag, submenu, submenuItemTag, delay = 300, activeClassName = 'active', position = { top: 0, left: 0 } } = options
-  let { activeIndex, keepSubmenuVisible = false } = options
+  const { menu, menuItemTag, submenu, submenuItemTag, delay = 300, activeClassName = 'active' } = options
+  let { position, activeIndex, keepSubmenuVisible = false } = options
 
   const menuItems = [...menu.querySelectorAll(menuItemTag)]
   const submenuItems = [...submenu.querySelectorAll(submenuItemTag)]
@@ -11,6 +11,10 @@ module.exports = function crossMenu (options) {
   if (activeIndex !== undefined) {
     activeIndex -= 1
     submenu.classList.add(activeClassName)
+  }
+
+  if (position === undefined && window.getComputedStyle(menu).display !== 'none') {
+    position = getElementOffset(menu)
   }
 
   let isMouseInSubmenu = false
@@ -111,6 +115,17 @@ function isSameSign (a, b) {
 function handleMousemMoveMenu (event) {
   mouseTrackList.unshift({ x: event.pageX, y: event.pageY })
   if (mouseTrackList.length > 2) mouseTrackList.length = 2
+}
+
+function getElementOffset (el) {
+  let top = 0
+  let left = 0
+  while (el.nodeName !== 'BODY') {
+    top += el.offsetTop
+    left += el.offsetLeft
+    el = el.offsetParent
+  }
+  return { top, left }
 }
 
 function initMenu (menus, activeIndex, activeClassName) {

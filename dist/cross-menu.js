@@ -92,10 +92,9 @@ module.exports = function crossMenu(options) {
       _options$delay = options.delay,
       delay = _options$delay === undefined ? 300 : _options$delay,
       _options$activeClassN = options.activeClassName,
-      activeClassName = _options$activeClassN === undefined ? 'active' : _options$activeClassN,
-      _options$position = options.position,
-      position = _options$position === undefined ? { top: 0, left: 0 } : _options$position;
-  var activeIndex = options.activeIndex,
+      activeClassName = _options$activeClassN === undefined ? 'active' : _options$activeClassN;
+  var position = options.position,
+      activeIndex = options.activeIndex,
       _options$keepSubmenuV = options.keepSubmenuVisible,
       keepSubmenuVisible = _options$keepSubmenuV === undefined ? false : _options$keepSubmenuV;
 
@@ -107,6 +106,10 @@ module.exports = function crossMenu(options) {
   if (activeIndex !== undefined) {
     activeIndex -= 1;
     submenu.classList.add(activeClassName);
+  }
+
+  if (position === undefined && window.getComputedStyle(menu).display !== 'none') {
+    position = getElementOffset(menu);
   }
 
   var isMouseInSubmenu = false;
@@ -219,6 +222,17 @@ function isSameSign(a, b) {
 function handleMousemMoveMenu(event) {
   mouseTrackList.unshift({ x: event.pageX, y: event.pageY });
   if (mouseTrackList.length > 2) mouseTrackList.length = 2;
+}
+
+function getElementOffset(el) {
+  var top = 0;
+  var left = 0;
+  while (el.nodeName !== 'BODY') {
+    top += el.offsetTop;
+    left += el.offsetLeft;
+    el = el.offsetParent;
+  }
+  return { top: top, left: left };
 }
 
 function initMenu(menus, activeIndex, activeClassName) {

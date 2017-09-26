@@ -32,59 +32,43 @@ crossMenu(options)
 </script>
 ```
 
-## options
+## Options
 
-- #### menu
-
-  `{HTMLElement} @require`
+- **`menu`** - *{HTMLElement} @require*
 
   一级菜单元素
 
-- #### menuItemTag
+- **`menuItemTag`** - *{String} @require*
 
-  `{String} @require`
+  一级菜单元素下的菜单项标签：`[...menu.querySelectorAll(menuItemTag)]`
 
-  一级菜单元素下的菜单项标签
-
-- #### submenu
-
-  `{HTMLElement} @require`
+- **`submenu`** - *{HTMLElement} @require*
 
   二级菜单元素
 
-- #### submenuItemTag
+- **`submenuItemTag`** - *{String} @require*
 
-  `{String} @require`
+  二级菜单元素下的菜单项标签：`[...submenu.querySelectorAll(submenuItemTag)]`
 
-  二级菜单元素下的菜单项标签
+- **`delay`** - *{Number} @default = 300*
 
-- #### delay
+  菜单切换延迟时间，即鼠标移动过程中在三角形区域内停顿 `delay` 毫秒表示切换一级菜单。
 
-  `{Number} @default = 300`
-
-  菜单切换延迟时间
-
-- #### position
-
-  `{Object} @default = { top: 0, left: 0 }`
+- **`position`** - *{Object} @value = { top: Number, left: Number }*
 
   菜单距离浏览器最上边和最左边的距离
 
-- #### activeClassName
+  **一般情况下不需要设置此属性，菜单的偏移值会被计算出来。只有当页面加载完成后菜单处于隐藏状态 `display: none` 时你需要使用此属性帮助确定位置，因为[隐藏元素的 `offsetParent` 为 `null`！](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetParent)**
 
-  `{String} @default = 'active'`
+- **`activeClassName`** - *{String} @default = 'active'*
 
   当前活动菜单类名
 
-- #### activeIndex
+- **`activeIndex`** - *{Number}*
 
-  `{Number}`
+  活动菜单的索引值，可用来设置默认活动菜单。
 
-  当前活动菜单的索引值（初始化默认显示第几个菜单项）
-
-- #### keepSubmenuVisible
-
-  `{Boolean} @default = false`
+- **`keepSubmenuVisible`** - *{Boolean} @default = false*
 
   是否保持二级菜单显示状态（不隐藏二级菜单）
 
@@ -97,7 +81,6 @@ crossMenu({
   submenu: document.querySelector('.submenu'),
   submenuItemTag: 'li',
   delay: 100,
-  position: { top: 100, left: 200 },
   activeClassName: 'active-menu',
   activeIndex: 3,
   keepSubmenuVisible: true

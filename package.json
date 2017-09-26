@@ -4,7 +4,8 @@
   "description": "仿亚马逊智能导航菜单功能，无依赖，支持现代浏览器",
   "main": "dist/cross-menu.js",
   "scripts": {
-    "build": "webpack --progress --display-error-details --profile"
+    "testing": "cross-env NODE_ENV=testing webpack",
+    "build": "cross-env NODE_ENV=production webpack -p"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
+    "cross-env": "^5.0.5",
     "webpack": "^3.5.6"
   }
 }

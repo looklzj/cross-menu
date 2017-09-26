@@ -4,7 +4,7 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'cross-menu.js',
+    filename: process.env.NODE_ENV === 'production' ? 'cross-menu.min.js' : 'cross-menu.js',
     library: 'crossMenu',
     libraryTarget: 'umd'
   },
